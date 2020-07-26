@@ -184,7 +184,7 @@ async function task_1_8(db) {
         FROM Categories c
         INNER JOIN Products p
             ON c.CategoryID = p.CategoryID
-        GROUP BY p.CategoryID;
+        GROUP BY p.CategoryID
     `);
     return result[0];
 }
