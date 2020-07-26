@@ -10,7 +10,7 @@ describe('sql-tasks', function() {
 
     before(async function() {
         dbconnection = await mysql.createConnection({
-            host     : process.env.HOST || '192.168.99.100',
+            host     : process.env.HOST || 'localhost',
             user     : process.env.USER_NAME || 'root',
             password : process.env.PASSWORD || 'password',
             database : process.env.DATABASE || 'northwind'
