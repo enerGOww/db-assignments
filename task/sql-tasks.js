@@ -185,6 +185,7 @@ async function task_1_8(db) {
         INNER JOIN Products p
             ON c.CategoryID = p.CategoryID
         GROUP BY p.CategoryID
+        ORDER BY c.CategoryName;
     `);
     return result[0];
 }
