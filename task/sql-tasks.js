@@ -283,9 +283,8 @@ async function task_1_12(db) {
 async function task_1_13(db) {
     let result = await db.query(`
         SELECT
-            COUNT(*) AS 'TotalOfCurrentProducts',
-            COUNT(Discontinued) AS 'TotalOfDiscontinuedProducts'
-        FROM Products;
+            (SELECT COUNT(*) FROM Products WHERE Discontinued = 1) AS TotalOfDiscontinuedProducts,
+            (SELECT COUNT(*) FROM Products) AS TotalOfCurrentProducts;
     `);
     return result[0];
 }
@@ -319,18 +318,18 @@ async function task_1_14(db) {
 async function task_1_15(db) {
     let result = await db.query(`
         SELECT
-            COUNT(MONTH(OrderDate) = 1) AS 'January',
-            COUNT(MONTH(OrderDate) = 2) AS 'February',
-            COUNT(MONTH(OrderDate) = 3) AS 'March',
-            COUNT(MONTH(OrderDate) = 4) AS 'April',
-            COUNT(MONTH(OrderDate) = 5) AS 'May',
-            COUNT(MONTH(OrderDate) = 6) AS 'June',
-            COUNT(MONTH(OrderDate) = 7) AS 'July',
-            COUNT(MONTH(OrderDate) = 8) AS 'August',
-            COUNT(MONTH(OrderDate) = 9) AS 'September',
-            COUNT(MONTH(OrderDate) = 10) AS 'October',
-            COUNT(MONTH(OrderDate) = 11) AS 'November',
-            COUNT(MONTH(OrderDate) = 12) AS 'December'
+            COUNT(IF(MONTH(OrderDate) = 1, 1, 0)) AS 'January',
+            COUNT(IF(MONTH(OrderDate) = 2, 1, 0)) AS 'February',
+            COUNT(IF(MONTH(OrderDate) = 3, 1, 0)) AS 'March',
+            COUNT(IF(MONTH(OrderDate) = 4, 1, 0)) AS 'April',
+            COUNT(IF(MONTH(OrderDate) = 5, 1, 0)) AS 'May',
+            COUNT(IF(MONTH(OrderDate) = 6, 1, 0)) AS 'June',
+            COUNT(IF(MONTH(OrderDate) = 7, 1, 0)) AS 'July',
+            COUNT(IF(MONTH(OrderDate) = 8, 1, 0)) AS 'August',
+            COUNT(IF(MONTH(OrderDate) = 9, 1, 0)) AS 'September',
+            COUNT(IF(MONTH(OrderDate) = 10, 1, 0)) AS 'October',
+            COUNT(IF(MONTH(OrderDate) = 11, 1, 0)) AS 'November',
+            COUNT(IF(MONTH(OrderDate) = 12, 1, 0)) AS 'December'
         FROM Orders
         WHERE YEAR(OrderDate) = 1997;
     `);
