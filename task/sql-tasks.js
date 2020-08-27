@@ -284,7 +284,7 @@ async function task_1_13(db) {
     let result = await db.query(`
         SELECT
             COUNT(*) AS 'TotalOfCurrentProducts',
-            SUM(Discontinued) AS 'TotalOfDiscontinuedProducts'
+            COUNT(Discontinued) AS 'TotalOfDiscontinuedProducts'
         FROM Products;
     `);
     return result[0];
@@ -319,18 +319,18 @@ async function task_1_14(db) {
 async function task_1_15(db) {
     let result = await db.query(`
         SELECT
-            SUM(MONTH(OrderDate) = 1) AS 'January',
-            SUM(MONTH(OrderDate) = 2) AS 'February',
-            SUM(MONTH(OrderDate) = 3) AS 'March',
-            SUM(MONTH(OrderDate) = 4) AS 'April',
-            SUM(MONTH(OrderDate) = 5) AS 'May',
-            SUM(MONTH(OrderDate) = 6) AS 'June',
-            SUM(MONTH(OrderDate) = 7) AS 'July',
-            SUM(MONTH(OrderDate) = 8) AS 'August',
-            SUM(MONTH(OrderDate) = 9) AS 'September',
-            SUM(MONTH(OrderDate) = 10) AS 'October',
-            SUM(MONTH(OrderDate) = 11) AS 'November',
-            SUM(MONTH(OrderDate) = 12) AS 'December'
+            COUNT(MONTH(OrderDate) = 1) AS 'January',
+            COUNT(MONTH(OrderDate) = 2) AS 'February',
+            COUNT(MONTH(OrderDate) = 3) AS 'March',
+            COUNT(MONTH(OrderDate) = 4) AS 'April',
+            COUNT(MONTH(OrderDate) = 5) AS 'May',
+            COUNT(MONTH(OrderDate) = 6) AS 'June',
+            COUNT(MONTH(OrderDate) = 7) AS 'July',
+            COUNT(MONTH(OrderDate) = 8) AS 'August',
+            COUNT(MONTH(OrderDate) = 9) AS 'September',
+            COUNT(MONTH(OrderDate) = 10) AS 'October',
+            COUNT(MONTH(OrderDate) = 11) AS 'November',
+            COUNT(MONTH(OrderDate) = 12) AS 'December'
         FROM Orders
         WHERE YEAR(OrderDate) = 1997;
     `);
