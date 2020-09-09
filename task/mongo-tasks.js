@@ -21,7 +21,18 @@
  * Test timeout is increased to 15sec for the function.
  * */
 async function before(db) {
-    await db.collection('employees').ensureIndex({CustomerID: 1});
+    await db.collection('opportunities').createIndex(
+        {
+            initiativeId: 1,
+            'contacts.questions.category_id': 1,
+        }
+    );
+    await db.collection('clientCriteria').createIndex(
+        { 
+            value: 1, 
+            'versions.initiativeId': 1 
+        }
+    );
 }
 
 /**
